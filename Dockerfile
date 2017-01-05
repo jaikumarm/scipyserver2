@@ -39,5 +39,7 @@ RUN conda install --quiet --yes psycopg2 pymongo\
 
 RUN pip install hyperopt
 
+ENV KERAS_BACKEND="theano"
+
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "/bin/bash" ]
