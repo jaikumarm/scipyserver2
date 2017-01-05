@@ -1,0 +1,20 @@
+machine:
+  services:
+    - docker
+dependencies:
+  post:
+    - docker build -t jaikumarm/scipyserver:keras120_py27 . | cat # workaround progress weirdness
+test:
+  post:
+    - docker run --rm jaikumarm/scipyserver:keras120_py27 python -V
+    - docker run --rm jaikumarm/scipyserver:keras120_py27 python -c "import talib; print (talib.__version__)"
+    - docker run --rm jaikumarm/scipyserver:keras120_py27 python -c "import theano; print (theano.__version__)"
+    - docker run --rm jaikumarm/scipyserver:keras120_py27 python -c "import keras; print (keras.__version__)"
+    - docker run --rm jaikumarm/scipyserver:keras120_py27 python -c "import tpot; print (tpot.__version__)"
+    - docker run --rm jaikumarm/scipyserver:keras120_py27 python -c "import hyperopt; print (hyperopt.__version__)"
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push jaikumarm/scipyserver:keras120_py27
