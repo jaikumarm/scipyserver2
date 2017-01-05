@@ -10,7 +10,9 @@ RUN apt-get update --fix-missing && apt-get upgrade -y && apt-get install -y wge
 
 RUN apt-get install gcc-4.9 g++-4.9 -y && \
     ln -s  /usr/bin/gcc-4.9 /usr/bin/gcc -f && \
-    ln -s  /usr/bin/g++-4.9 /usr/bin/g++ -f
+    ln -s  /usr/bin/g++-4.9 /usr/bin/g++ -f && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*    
 
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     wget --quiet https://repo.continuum.io/archive/Anaconda2-4.1.1-Linux-x86_64.sh -O ~/anaconda.sh && \
@@ -22,7 +24,8 @@ RUN apt-get install -y curl grep sed dpkg && \
     curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
     dpkg -i tini.deb && \
     rm tini.deb && \
-    apt-get clean
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* 
 
 ENV PATH /opt/conda/bin:$PATH
 
