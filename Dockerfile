@@ -30,13 +30,14 @@ ENV PATH /opt/conda/bin:$PATH
 RUN conda install --quiet --yes -c jaikumarm \
 	'theano=0.9.0.dev4' \
 	'keras=1.2.0' \
-	'hyperopt=0.0.3.dev3' \
 	'ta-lib=0.4.9' \
 	'flatdict=1.2.0' \
 	&& conda clean -tipsy
 
 RUN conda install --quiet --yes psycopg2 pymongo\
 	&& conda clean -tipsy
+
+RUN pip install hyperopt
 
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "/bin/bash" ]
