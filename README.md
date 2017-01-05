@@ -1,2 +1,3 @@
 # scipyserver2
-docker container for quick ml experiments with python 2.7, conda, ipython, keras, theano and hyperopt
+
+CircleCI Build Status [![CircleCI](https://circleci.com/gh/jaikumarm/scipyserver2/tree/master.svg?style=svg)](https://circleci.com/gh/jaikumarm/scipyserver2/tree/master)
