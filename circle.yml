@@ -8,7 +8,7 @@ test:
   post:
     - docker run --rm jaikumarm/scipyserver2 python -V
     - docker run --rm jaikumarm/scipyserver2 python -c "import theano; print (theano.__version__)"
-    - docker run --rm jaikumarm/scipyserver2 KERAS_BACKEND=tensorflow python -c "import keras; print (keras.__version__)"
+    - docker run --rm jaikumarm/scipyserver2 python -c "import os; os.environ['KERAS_BACKEND']="theano"; import keras; print (keras.__version__)"
     - docker run --rm jaikumarm/scipyserver2 python -c "import hyperopt; print (hyperopt.__version__)"
 deployment:
   hub:
