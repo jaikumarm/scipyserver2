@@ -32,11 +32,12 @@ RUN conda install --quiet --yes -c jaikumarm \
 	'keras=1.2.0' \
 	'ta-lib=0.4.9' \
 	'flatdict=1.2.0' \
-  'hyperopt=0.1' \
 	&& conda clean -tipsy
 
 RUN conda install --quiet --yes psycopg2 pymongo\
 	&& conda clean -tipsy
+
+RUN pip install hyperopt
 
 ENV KERAS_BACKEND="theano"
 
