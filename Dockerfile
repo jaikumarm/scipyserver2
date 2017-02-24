@@ -14,7 +14,7 @@ RUN apt-get install gcc-4.9 g++-4.9 -y && \
     apt-get clean
 
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
-    wget --quiet https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh -O ~/anaconda.sh && \
+    wget --quiet https://repo.continuum.io/archive/Anaconda2-4.3.0-Linux-x86_64.sh -O ~/anaconda.sh && \
     /bin/bash ~/anaconda.sh -b -p /opt/conda && \
     rm ~/anaconda.sh
 
@@ -34,11 +34,12 @@ RUN conda install --quiet --yes -c jaikumarm \
 	'flatdict=1.2.0' \
 	&& conda clean -tipsy
 
-RUN conda install --quiet --yes psycopg2 pymongo\
+RUN conda install --quiet --yes psycopg2 pymongo future paramiko gunicorn\
 	&& conda clean -tipsy
 
-RUN pip install hyperopt
-
+RUN pip install --upgrade pip && \
+    pip install hyperopt IbPy2 pytz backtrader
+    
 ENV KERAS_BACKEND="theano"
 
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
